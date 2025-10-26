@@ -17,3 +17,4 @@ public class ErrorResponseDTO {
     private String path;
 }
 // Commit 120 on 2025-10-28 10:01:06
+// Commit 60 on 2025-10-26 17:26:26
