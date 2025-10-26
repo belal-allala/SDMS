@@ -10,3 +10,4 @@ import java.util.UUID;
 public interface Colis_ProduitRepository extends JpaRepository<Colis_Produit, UUID> {
 }
 // Commit 9 on 2025-10-28 02:08:38
+// Commit 10 on 2025-10-26 01:39:21
