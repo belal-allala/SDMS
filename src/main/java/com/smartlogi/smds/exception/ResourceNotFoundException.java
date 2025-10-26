@@ -14,3 +14,4 @@ public class ResourceNotFoundException extends RuntimeException {
         super(message, cause);
     }
 }
+// Commit 65 on 2025-10-26 11:40:18
