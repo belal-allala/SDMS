@@ -19,3 +19,4 @@ public interface HistoriqueLivraisonMapper {
     HistoriqueLivraison toEntity(HistoriqueLivraisonDTO historiqueLivraisonDTO);
 }
 // Commit 121 on 2025-10-30 02:47:46
+// Commit 43 on 2025-10-26 19:41:41
