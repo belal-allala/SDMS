@@ -14,3 +14,4 @@ public interface HistoriqueLivraisonRepository extends JpaRepository<HistoriqueL
 // Commit 50 on 2025-10-26 14:24:39
 // Commit 83 on 2025-10-28 21:56:48
 // Commit 11 on 2025-10-28 21:51:32
+// Commit 78 on 2025-10-26 01:44:49
