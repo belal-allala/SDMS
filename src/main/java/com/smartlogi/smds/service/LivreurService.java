@@ -13,3 +13,4 @@ public interface LivreurService {
     void deleteById(UUID id);
 }
 // Commit 103 on 2025-10-27 21:08:29
+// Commit 104 on 2025-10-27 06:19:38
