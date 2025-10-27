@@ -13,3 +13,4 @@ public interface ProduitService {
     void deleteById(UUID id);
 }
 // Commit 51 on 2025-10-28 22:47:12
+// Commit 99 on 2025-10-27 04:00:06
