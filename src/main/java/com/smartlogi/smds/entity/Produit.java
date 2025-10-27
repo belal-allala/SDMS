@@ -41,3 +41,4 @@ public class Produit {
     private Double prix;
 }
 // Commit 34 on 2025-10-27 20:21:02
+// Commit 45 on 2025-10-27 09:34:39
