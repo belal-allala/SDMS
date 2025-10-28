@@ -12,3 +12,4 @@ public interface HistoriqueLivraisonService {
     Optional<HistoriqueLivraisonDTO> findById(UUID id);
     void deleteById(UUID id);
 }
+// Commit 75 on 2025-10-29 00:58:41
