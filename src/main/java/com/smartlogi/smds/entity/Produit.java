@@ -43,3 +43,4 @@ public class Produit {
 // Commit 34 on 2025-10-27 20:21:02
 // Commit 45 on 2025-10-27 09:34:39
 // Commit 6 on 2025-10-29 05:38:11
+// Commit 7 on 2025-10-28 04:40:56
