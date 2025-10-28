@@ -13,3 +13,4 @@ public interface Colis_ProduitService {
     void deleteById(UUID id);
 }
 // Commit 12 on 2025-10-26 10:15:29
+// Commit 71 on 2025-10-28 21:34:43
