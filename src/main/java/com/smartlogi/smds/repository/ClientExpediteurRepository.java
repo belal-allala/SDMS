@@ -10,3 +10,4 @@ import java.util.UUID;
 public interface ClientExpediteurRepository extends JpaRepository<ClientExpediteur, UUID> {
 }
 // Commit 54 on 2025-10-29 19:19:37
+// Commit 80 on 2025-10-29 15:17:19
