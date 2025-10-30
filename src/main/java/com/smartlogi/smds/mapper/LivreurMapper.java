@@ -21,3 +21,4 @@ public interface LivreurMapper {
 }
 // Commit 76 on 2025-10-26 00:00:37
 // Commit 70 on 2025-10-30 17:50:25
+// Commit 105 on 2025-10-30 22:52:07
