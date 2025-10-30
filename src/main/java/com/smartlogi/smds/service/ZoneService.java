@@ -1,13 +1,15 @@
 package com.smartlogi.smds.service;
 
-import com.smartlogi.smds.entity.Zone;
+import com.smartlogi.smds.dto.ZoneDTO;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 public interface ZoneService {
-    Zone save(Zone zone);
-    List<Zone> findAll();
-    Optional<Zone> findById(Long id);
-    void deleteById(Long id);
+    ZoneDTO save(ZoneDTO zone);
+    List<ZoneDTO> findAll();
+    Optional<ZoneDTO> findById(UUID id);
+    void deleteById(UUID id);
 }
+// Commit 18 on 2025-10-30 03:28:49
