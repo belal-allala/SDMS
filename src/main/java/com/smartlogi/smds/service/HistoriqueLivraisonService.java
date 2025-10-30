@@ -1,13 +1,14 @@
 package com.smartlogi.smds.service;
 
-import com.smartlogi.smds.entity.HistoriqueLivraison;
+import com.smartlogi.smds.dto.HistoriqueLivraisonDTO;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 public interface HistoriqueLivraisonService {
-    HistoriqueLivraison save(HistoriqueLivraison historiqueLivraison);
-    List<HistoriqueLivraison> findAll();
-    Optional<HistoriqueLivraison> findById(Long id);
-    void deleteById(Long id);
+    HistoriqueLivraisonDTO save(HistoriqueLivraisonDTO historiqueLivraisonDTO);
+    List<HistoriqueLivraisonDTO> findAll();
+    Optional<HistoriqueLivraisonDTO> findById(UUID id);
+    void deleteById(UUID id);
 }

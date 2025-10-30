@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <changeSet id="001-create-user-table" author="sdms_dev">
+        <createTable tableName="users">
+            <column name="id" type="UUID">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="username" type="VARCHAR(100)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="email" type="VARCHAR(255)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="password" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="role" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="002-create-zone-table" author="sdms_dev">
+        <createTable tableName="zone">
+            <column name="id" type="UUID">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="nom" type="VARCHAR(255)"/>
+            <column name="code_postal" type="VARCHAR(50)"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="003-create-produit-table" author="sdms_dev">
+        <createTable tableName="produit">
+            <column name="id" type="UUID">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="nom" type="VARCHAR(255)"/>
+            <column name="categorie" type="VARCHAR(255)"/>
+            <column name="poids" type="DOUBLE PRECISION"/>
+            <column name="prix" type="DOUBLE PRECISION"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="004-create-client-expediteur-table" author="sdms_dev">
+        <createTable tableName="client_expediteur">
+            <column name="id" type="UUID">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="nom" type="VARCHAR(255)"/>
+            <column name="prenom" type="VARCHAR(255)"/>
+            <column name="email" type="VARCHAR(255)"/>
+            <column name="telephone" type="VARCHAR(50)"/>
+            <column name="adresse" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="005-create-destinataire-table" author="sdms_dev">
+        <createTable tableName="destinataire">
+            <column name="id" type="UUID">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="nom" type="VARCHAR(255)"/>
+            <column name="prenom" type="VARCHAR(255)"/>
+            <column name="email" type="VARCHAR(255)"/>
+            <column name="telephone" type="VARCHAR(50)"/>
+            <column name="adresse" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="006-create-livreur-table" author="sdms_dev">
+        <createTable tableName="livreur">
+            <column name="id" type="UUID">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="nom" type="VARCHAR(255)"/>
+            <column name="prenom" type="VARCHAR(255)"/>
+            <column name="telephone" type="VARCHAR(50)"/>
+            <column name="vehicule" type="VARCHAR(255)"/>
+            <column name="zone_assignee_id" type="UUID">
+                <constraints nullable="false" foreignKeyName="fk_livreur_zone" references="zone(id)"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="007-create-colis-table" author="sdms_dev">
+        <createTable tableName="colis">
+            <column name="id" type="UUID">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="description" type="VARCHAR(255)"/>
+            <column name="poids" type="DOUBLE PRECISION"/>
+            <column name="statut" type="VARCHAR(50)"/>
+            <column name="priorite" type="VARCHAR(50)"/>
+            <column name="ville_destination" type="VARCHAR(255)"/>
+            <column name="client_expediteur_id" type="UUID">
+                <constraints nullable="false" foreignKeyName="fk_colis_client_expediteur" references="client_expediteur(id)"/>
+            </column>
+            <column name="destinataire_id" type="UUID">
+                <constraints nullable="false" foreignKeyName="fk_colis_destinataire" references="destinataire(id)"/>
+            </column>
+            <column name="livreur_id" type="UUID">
+                <constraints foreignKeyName="fk_colis_livreur" references="livreur(id)"/>
+            </column>
+            <column name="zone_id" type="UUID">
+                <constraints nullable="false" foreignKeyName="fk_colis_zone" references="zone(id)"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="008-create-historique-livraison-table" author="sdms_dev">
+        <createTable tableName="historique_livraison">
+            <column name="id" type="UUID">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="statut" type="VARCHAR(50)"/>
+            <column name="date_changement" type="TIMESTAMP"/>
+            <column name="commentaire" type="VARCHAR(255)"/>
+            <column name="colis_id" type="UUID">
+                <constraints nullable="false" foreignKeyName="fk_historique_colis" references="colis(id)"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="009-create-colis-produit-table" author="sdms_dev">
+        <createTable tableName="colis_produit">
+            <column name="id" type="UUID">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="colis_id" type="UUID">
+                <constraints nullable="false" foreignKeyName="fk_colisproduit_colis" references="colis(id)"/>
+            </column>
+            <column name="produit_id" type="UUID">
+                <constraints nullable="false" foreignKeyName="fk_colisproduit_produit" references="produit(id)"/>
+            </column>
+            <column name="quantite" type="INTEGER"/>
+            <column name="prix" type="DOUBLE PRECISION"/>
+            <column name="date_ajout" type="DATE"/>
+        </createTable>
+    </changeSet>
+
+</databaseChangeLog>
