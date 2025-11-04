@@ -30,7 +30,7 @@ public class ColisServiceImpl implements ColisService {
     private final HistoriqueLivraisonRepository historiqueLivraisonRepository;
     private final ColisMapper colisMapper = ColisMapper.INSTANCE;
 
-    public ColisServiceImpl(ColisRepository colisRepository, ClientExpediteurRepository clientExpediteurRepository, DestinataireRepository destinataireRepository, LivreurRepository livreurRepository, ZoneRepository zoneRepository) {
+    public ColisServiceImpl(ColisRepository colisRepository, ClientExpediteurRepository clientExpediteurRepository, DestinataireRepository destinataireRepository, LivreurRepository livreurRepository, ZoneRepository zoneRepository, HistoriqueLivraisonRepository historiqueLivraisonRepository) {
         this.colisRepository = colisRepository;
         this.clientExpediteurRepository = clientExpediteurRepository;
         this.destinataireRepository = destinataireRepository;
