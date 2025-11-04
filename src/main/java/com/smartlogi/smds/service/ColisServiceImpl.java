@@ -5,6 +5,10 @@ import com.smartlogi.smds.entity.*;
 import com.smartlogi.smds.exception.ResourceNotFoundException;
 import com.smartlogi.smds.mapper.ColisMapper;
 import com.smartlogi.smds.repository.*;
+import com.smartlogi.smds.repository.specification.ColisSpecification;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
