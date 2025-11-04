@@ -20,6 +20,7 @@ public class ColisServiceImpl implements ColisService {
     private final DestinataireRepository destinataireRepository;
     private final LivreurRepository livreurRepository;
     private final ZoneRepository zoneRepository;
+    private final HistoriqueLivraisonRepository historiqueLivraisonRepository;
     private final ColisMapper colisMapper = ColisMapper.INSTANCE;
 
     public ColisServiceImpl(ColisRepository colisRepository, ClientExpediteurRepository clientExpediteurRepository, DestinataireRepository destinataireRepository, LivreurRepository livreurRepository, ZoneRepository zoneRepository) {
