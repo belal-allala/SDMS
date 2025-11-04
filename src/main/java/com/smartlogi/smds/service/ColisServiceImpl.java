@@ -2,6 +2,7 @@ package com.smartlogi.smds.service;
 
 import com.smartlogi.smds.dto.ColisDTO;
 import com.smartlogi.smds.entity.*;
+import com.smartlogi.smds.exception.ResourceNotFoundException;
 import com.smartlogi.smds.mapper.ColisMapper;
 import com.smartlogi.smds.repository.*;
 import org.springframework.stereotype.Service;
