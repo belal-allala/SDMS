@@ -28,6 +28,7 @@ public class ColisServiceImpl implements ColisService {
         this.destinataireRepository = destinataireRepository;
         this.livreurRepository = livreurRepository;
         this.zoneRepository = zoneRepository;
+        this.historiqueLivraisonRepository = historiqueLivraisonRepository;
     }
 
     @Override
