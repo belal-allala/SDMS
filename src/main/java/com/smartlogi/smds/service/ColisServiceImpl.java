@@ -55,7 +55,7 @@ public class ColisServiceImpl implements ColisService {
 
         if (colisDTO.getDestinataireId() != null) {
             Destinataire destinataire = destinataireRepository.findById(UUID.fromString(colisDTO.getDestinataireId()))
-                    .orElseThrow(() -> new RuntimeException("Destinataire non trouvé"));
+                    .orElseThrow(() -> new ResourceNotFoundException("Destinataire non trouvé"));
             colis.setDestinataire(destinataire);
         }
 
