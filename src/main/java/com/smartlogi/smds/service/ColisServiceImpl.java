@@ -34,6 +34,10 @@ public class ColisServiceImpl implements ColisService {
     public ColisDTO save(ColisDTO colisDTO) {
         Colis colis = colisMapper.toEntity(colisDTO);
 
+        if (colis.getId() == null) { // C'est une nouvelle entité
+            colis.setDateCreation(LocalDate.now());
+        }
+
         if (colisDTO.getClientExpediteurId() != null) {
             ClientExpediteur clientExpediteur = clientExpediteurRepository.findById(UUID.fromString(colisDTO.getClientExpediteurId()))
                     .orElseThrow(() -> new RuntimeException("ClientExpediteur non trouvé"));
