@@ -49,7 +49,7 @@ public class ColisServiceImpl implements ColisService {
 
         if (colisDTO.getClientExpediteurId() != null) {
             ClientExpediteur clientExpediteur = clientExpediteurRepository.findById(UUID.fromString(colisDTO.getClientExpediteurId()))
-                    .orElseThrow(() -> new RuntimeException("ClientExpediteur non trouvé"));
+                    .orElseThrow(() -> new ResourceNotFoundException("ClientExpediteur non trouvé"));
             colis.setClientExpediteur(clientExpediteur);
         }
 
