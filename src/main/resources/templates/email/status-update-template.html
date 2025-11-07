@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mise à jour du statut de votre colis</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #1f2937;
+            background-color: #f9fafb;
+        }
+
+        .email-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 100%);
+            padding: 40px 30px;
+            text-align: center;
+            color: white;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            letter-spacing: 1px;
+        }
+
+        .header-subtitle {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        /* Main Content */
+        .content {
+            padding: 40px 30px;
+        }
+
+        .greeting {
+            font-size: 18px;
+            font-weight: 600;
+            color: #1f2937;
+            margin-bottom: 20px;
+        }
+
+        .intro-text {
+            font-size: 14px;
+            color: #4b5563;
+            margin-bottom: 30px;
+            line-height: 1.8;
+        }
+
+        /* Status Alert */
+        .status-alert {
+            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+            border-left: 4px solid #f59e0b;
+            padding: 20px;
+            margin-bottom: 30px;
+            border-radius: 4px;
+        }
+
+        .status-label {
+            font-size: 12px;
+            text-transform: uppercase;
+            color: #92400e;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            margin-bottom: 8px;
+        }
+
+        .status-value {
+            font-size: 22px;
+            font-weight: 700;
+            color: #d97706;
+            text-transform: capitalize;
+        }
+
+        /* Tracking Info */
+        .tracking-section {
+            background-color: #f3f4f6;
+            padding: 25px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+        }
+
+        .section-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: #1f2937;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+        }
+
+        .section-title::before {
+            content: "📦";
+            margin-right: 10px;
+            font-size: 18px;
+        }
+
+        .info-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .info-row:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+
+        .info-label {
+            font-size: 12px;
+            text-transform: uppercase;
+            color: #6b7280;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        .info-value {
+            font-size: 14px;
+            color: #1f2937;
+            font-weight: 600;
+            text-align: right;
+        }
+
+        /* Timeline */
+        .timeline-section {
+            background-color: #f3f4f6;
+            padding: 25px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+        }
+
+        .timeline-section .section-title::before {
+            content: "📍";
+        }
+
+        .timeline-item {
+            display: flex;
+            margin-bottom: 20px;
+        }
+
+        .timeline-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .timeline-marker {
+            width: 30px;
+            height: 30px;
+            background-color: #1e3a8a;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 16px;
+            font-weight: 700;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+
+        .timeline-marker.completed {
+            background-color: #10b981;
+        }
+
+        .timeline-marker.pending {
+            background-color: #ef4444;
+        }
+
+        .timeline-content {
+            flex: 1;
+        }
+
+        .timeline-status {
+            font-size: 14px;
+            font-weight: 600;
+            color: #1f2937;
+            margin-bottom: 4px;
+        }
+
+        .timeline-date {
+            font-size: 12px;
+            color: #6b7280;
+        }
+
+        /* CTA Button */
+        .cta-section {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(135deg, #ff6b35 0%, #ff8c42 100%);
+            color: white;
+            padding: 14px 40px;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 14px;
+            transition: transform 0.2s;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+        }
+
+        /* Footer */
+        .footer {
+            background-color: #f3f4f6;
+            padding: 30px;
+            text-align: center;
+            border-top: 1px solid #e5e7eb;
+        }
+
+        .footer-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: #1f2937;
+            margin-bottom: 15px;
+        }
+
+        .footer-contact {
+            font-size: 13px;
+            color: #4b5563;
+            margin-bottom: 20px;
+            line-height: 1.8;
+        }
+
+        .footer-link {
+            color: #1e3a8a;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .footer-link:hover {
+            text-decoration: underline;
+        }
+
+        .social-links {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid #e5e7eb;
+        }
+
+        .social-links a {
+            display: inline-block;
+            margin: 0 10px;
+            color: #1e3a8a;
+            text-decoration: none;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .copyright {
+            font-size: 11px;
+            color: #9ca3af;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid #e5e7eb;
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            .content, .footer, .tracking-section, .timeline-section {
+                padding: 20px;
+            }
+
+            .header {
+                padding: 30px 20px;
+            }
+
+            .info-row {
+                flex-direction: column;
+            }
+
+            .info-value {
+                text-align: left;
+                margin-top: 5px;
+            }
+
+            .logo {
+                font-size: 24px;
+            }
+
+            .status-value {
+                font-size: 18px;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="email-container">
+    <!-- Header -->
+    <div class="header">
+        <div class="logo">SmartLogi</div>
+        <div class="header-subtitle">Suivi de votre livraison</div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="content">
+        <div class="greeting">Bonjour <span th:text="${recipientName}"></span>,</div>
+        <div class="intro-text">
+            Nous sommes heureux de vous informer que votre colis a été mis à jour.
+            Ci-dessous, vous trouverez tous les détails concernant votre livraison.
+        </div>
+
+        <!-- Status Alert -->
+        <div class="status-alert">
+            <div class="status-label">📦 Statut actuel</div>
+            <div class="status-value" th:text="${newStatus}"></div>
+        </div>
+
+        <!-- Tracking Info -->
+        <div class="tracking-section">
+            <div class="section-title">Détails de votre colis</div>
+            <div class="info-row">
+                <div>
+                    <div class="info-label">Numéro de suivi</div>
+                </div>
+                <div class="info-value" th:text="${trackingNumber}"></div>
+            </div>
+            <div class="info-row">
+                <div>
+                    <div class="info-label">Date de mise à jour</div>
+                </div>
+                <div class="info-value" th:text="${#dates.format(#dates.createNow(), 'dd MMM yyyy HH:mm')}"></div>
+            </div>
+            <div class="info-row">
+                <div>
+                    <div class="info-label">Destinataire</div>
+                </div>
+                <div class="info-value" th:text="${recipientName}"></div>
+            </div>
+        </div>
+
+        <!-- Timeline -->
+        <div class="timeline-section">
+            <div class="section-title">Étapes de livraison</div>
+            <div class="timeline-item">
+                <div class="timeline-marker completed">✓</div>
+                <div class="timeline-content">
+                    <div class="timeline-status">Colis traité</div>
+                    <div class="timeline-date">Réception au centre de tri</div>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-marker completed">✓</div>
+                <div class="timeline-content">
+                    <div class="timeline-status">En transit</div>
+                    <div class="timeline-date">Colis en route vers la destination</div>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-marker pending">!</div>
+                <div class="timeline-content">
+                    <div class="timeline-status" th:text="${newStatus}">Étape actuelle</div>
+                    <div class="timeline-date">Mise à jour: <span th:text="${#dates.format(#dates.createNow(), 'dd/MM/yyyy')}"></span></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- CTA Button -->
+        <div class="cta-section">
+            <a href="https://smartlogi.com/track" class="cta-button">Suivre mon colis</a>
+        </div>
+
+        <div class="intro-text" style="font-size: 13px; font-style: italic; margin-top: 20px;">
+            Si vous avez des questions ou besoin d'aide, notre équipe est disponible 24/7.
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        <div class="footer-title">SmartLogi</div>
+        <div class="footer-contact">
+            Besoin d'aide ? Contactez-nous :<br>
+            📧 <a href="mailto:support@smartlogi.com" class="footer-link">support@smartlogi.com</a><br>
+            📞 +33 1 23 45 67 89<br>
+            🌐 <a href="https://smartlogi.com" class="footer-link">www.smartlogi.com</a>
+        </div>
+        <div class="social-links">
+            <a href="https://facebook.com/smartlogi">Facebook</a> |
+            <a href="https://twitter.com/smartlogi">Twitter</a> |
+            <a href="https://instagram.com/smartlogi">Instagram</a>
+        </div>
+        <div class="copyright">
+            © 2025 SmartLogi. Tous droits réservés. |
+            <a href="https://smartlogi.com/privacy" class="footer-link">Politique de confidentialité</a>
+        </div>
+    </div>
+</div>
+</body>
+</html>

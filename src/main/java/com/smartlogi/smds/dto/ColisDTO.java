@@ -9,6 +9,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
 
+import java.time.LocalDate;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -32,18 +34,16 @@ public class ColisDTO {
     @NotNull(message = "Le statut ne peut pas être nul")
     private StatutColis statutColis;
 
+    private LocalDate dateCreation;
+
     @NotBlank(message = "L'ID du destinataire ne peut pas être vide")
     private String destinataireId;
 
     @NotBlank(message = "L'ID du client expéditeur ne peut pas être vide")
     private String clientExpediteurId;
 
-    private String livreurId; // Peut être null au début
+    private String livreurId;
 
     @NotBlank(message = "L'ID de la zone ne peut pas être vide")
     private String zoneId;
 }
-// Commit 41 on 2025-10-26 17:15:14
-// Commit 109 on 2025-10-26 04:18:43
-// Commit 84 on 2025-10-27 23:03:42
-// Commit 87 on 2025-10-26 04:54:08

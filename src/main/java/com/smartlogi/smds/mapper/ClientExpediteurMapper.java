@@ -14,11 +14,4 @@ public interface ClientExpediteurMapper {
 
     ClientExpediteur toEntity(ClientExpediteurDTO clientExpediteurDTO);
 }
-// Commit 21 on 2025-10-28 00:16:56
-// Commit 58 on 2025-10-27 21:53:30
-// Commit 64 on 2025-10-28 19:23:31
-// Commit 90 on 2025-10-26 16:35:00
-// Commit 35 on 2025-10-27 18:43:51
-// Commit 57 on 2025-10-27 04:28:30
-// Commit 118 on 2025-10-30 11:45:01
-// Commit 120 on 2025-10-28 14:32:25
+

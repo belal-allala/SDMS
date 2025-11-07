@@ -1,5 +1,7 @@
 package com.smartlogi.smds.entity;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 import com.smartlogi.smds.entity.StatutColis;
 import jakarta.validation.constraints.NotBlank;
@@ -9,6 +11,7 @@ import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import java.time.LocalDate;
 import java.util.UUID;
 
 @Entity
@@ -16,6 +19,7 @@ import java.util.UUID;
 @AllArgsConstructor
 @Data
 @NoArgsConstructor
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Colis {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
@@ -44,6 +48,9 @@ public class Colis {
     @Enumerated(EnumType.STRING)
     private StatutColis statutColis;
 
+    @Column(name = "date_creation")
+    private LocalDate dateCreation;
+
     @NotNull(message = "Le client expéditeur ne peut pas être nul")
     @ManyToOne
     @JoinColumn(name = "client_expediteur_id")
@@ -63,11 +70,3 @@ public class Colis {
     private Zone zone;
 
 }
-// Commit 94 on 2025-10-27 02:41:42
-// Commit 118 on 2025-10-26 07:45:19
-// Commit 16 on 2025-10-29 15:38:20
-// Commit 28 on 2025-10-28 22:35:36
-// Commit 56 on 2025-10-29 02:11:58
-// Commit 59 on 2025-10-29 06:08:12
-// Commit 73 on 2025-10-28 15:14:26
-// Commit 88 on 2025-10-27 10:26:30

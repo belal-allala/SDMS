@@ -1,5 +1,7 @@
 package com.smartlogi.smds.entity;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.smartlogi.smds.entity.StatutColis;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
@@ -17,6 +19,7 @@ import java.util.UUID;
 @AllArgsConstructor
 @Data
 @NoArgsConstructor
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class HistoriqueLivraison {
 
     @Id
@@ -41,6 +44,3 @@ public class HistoriqueLivraison {
     @JoinColumn(name = "colis_id")
     private Colis colis;
 }
-// Commit 35 on 2025-10-29 12:15:08
-// Commit 62 on 2025-10-29 13:23:30
-// Commit 74 on 2025-10-27 15:26:58

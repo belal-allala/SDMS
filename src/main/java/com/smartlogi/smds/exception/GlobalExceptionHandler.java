@@ -54,6 +54,4 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(errorResponseDTO, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }
-// Commit 36 on 2025-10-29 18:04:22
-// Commit 33 on 2025-10-30 20:16:29
-// Commit 106 on 2025-10-29 18:50:21
+

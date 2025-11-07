@@ -25,15 +25,7 @@ public class Colis_ProduitDTO {
     @Positive(message = "La quantité doit être un nombre positif")
     private Integer quantite;
 
-    @NotNull(message = "Le prix ne peut pas être nul")
-    @Positive(message = "Le prix doit être un nombre positif")
+    // Le prix et la date d'ajout seront gérés par le serveur
     private Double prix;
-
-    @NotNull(message = "La date d'ajout ne peut pas être nulle")
     private LocalDate dateAjout;
 }
-// Commit 30 on 2025-10-26 16:10:18
-// Commit 33 on 2025-10-26 00:05:22
-// Commit 92 on 2025-10-27 19:37:17
-// Commit 98 on 2025-10-29 18:29:01
-// Commit 89 on 2025-10-26 18:10:04

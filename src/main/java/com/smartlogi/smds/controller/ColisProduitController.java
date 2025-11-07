@@ -3,6 +3,8 @@ package com.smartlogi.smds.controller;
 import com.smartlogi.smds.dto.Colis_ProduitDTO;
 import com.smartlogi.smds.exception.ResourceNotFoundException;
 import com.smartlogi.smds.service.Colis_ProduitService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,6 +15,7 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/colis-produits")
+@Tag(name = "Colis-Produits", description = "API pour la gestion du contenu des colis")
 public class ColisProduitController {
 
     private final Colis_ProduitService colisProduitService;
@@ -21,27 +24,21 @@ public class ColisProduitController {
         this.colisProduitService = colisProduitService;
     }
 
-    /**
-     * Ajoute un produit à un colis.
-     */
+    @Operation(summary = "Ajouter un produit à un colis")
     @PostMapping
     public ResponseEntity<Colis_ProduitDTO> addProduitToColis(@Valid @RequestBody Colis_ProduitDTO colisProduitDTO) {
         Colis_ProduitDTO savedRelation = colisProduitService.save(colisProduitDTO);
         return new ResponseEntity<>(savedRelation, HttpStatus.CREATED);
     }
 
-    /**
-     * Récupère toutes les associations colis-produit.
-     */
+    @Operation(summary = "Récupérer toutes les associations colis-produit")
     @GetMapping
     public ResponseEntity<List<Colis_ProduitDTO>> findAll() {
         List<Colis_ProduitDTO> relations = colisProduitService.findAll();
         return ResponseEntity.ok(relations);
     }
 
-    /**
-     * Récupère une association spécifique par son ID.
-     */
+    @Operation(summary = "Récupérer une association par son ID")
     @GetMapping("/{id}")
     public ResponseEntity<Colis_ProduitDTO> findById(@PathVariable UUID id) {
         Colis_ProduitDTO relation = colisProduitService.findById(id)
@@ -49,9 +46,7 @@ public class ColisProduitController {
         return ResponseEntity.ok(relation);
     }
 
-    /**
-     * Met à jour une association (ex: changer la quantité).
-     */
+    @Operation(summary = "Mettre à jour une association (ex: changer la quantité)")
     @PutMapping("/{id}")
     public ResponseEntity<Colis_ProduitDTO> updateRelation(@PathVariable UUID id, @Valid @RequestBody Colis_ProduitDTO details) {
         colisProduitService.findById(id)
@@ -61,9 +56,7 @@ public class ColisProduitController {
         return ResponseEntity.ok(updatedRelation);
     }
 
-    /**
-     * Supprime un produit d'un colis.
-     */
+    @Operation(summary = "Supprimer un produit d'un colis")
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> removeProduitFromColis(@PathVariable UUID id) {
         colisProduitService.findById(id)

@@ -18,13 +18,7 @@ public interface Colis_ProduitMapper {
 
     @Mapping(source = "colisId", target = "colis.id")
     @Mapping(source = "produitId", target = "produit.id")
+    @Mapping(target = "prix", ignore = true) // Ignorer le prix lors de la conversion DTO -> Entité
+    @Mapping(target = "dateAjout", ignore = true) // Ignorer la date lors de la conversion DTO -> Entité
     Colis_Produit toEntity(Colis_ProduitDTO colis_produitDTO);
 }
-// Commit 16 on 2025-10-28 13:50:17
-// Commit 73 on 2025-10-28 19:47:01
-// Commit 74 on 2025-10-28 20:02:00
-// Commit 79 on 2025-10-29 09:01:49
-// Commit 87 on 2025-10-28 00:59:03
-// Commit 38 on 2025-10-26 03:37:02
-// Commit 61 on 2025-10-30 23:40:49
-// Commit 83 on 2025-10-30 21:22:22

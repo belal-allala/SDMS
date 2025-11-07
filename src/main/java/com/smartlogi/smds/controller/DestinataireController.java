@@ -3,6 +3,8 @@ package com.smartlogi.smds.controller;
 import com.smartlogi.smds.dto.DestinataireDTO;
 import com.smartlogi.smds.exception.ResourceNotFoundException;
 import com.smartlogi.smds.service.DestinataireService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.HttpStatus;
@@ -13,6 +15,7 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/destinataires")
+@Tag(name = "Destinataires", description = "API pour la gestion des destinataires")
 public class DestinataireController {
     private final DestinataireService destinataireService;
 
@@ -20,18 +23,21 @@ public class DestinataireController {
         this.destinataireService = destinataireService;
     }
 
+    @Operation(summary = "Créer un nouveau destinataire")
     @PostMapping
     public ResponseEntity<DestinataireDTO> save(@Valid @RequestBody DestinataireDTO destinataireDTO) {
         DestinataireDTO dto = destinataireService.save(destinataireDTO);
         return new ResponseEntity<>(dto, HttpStatus.CREATED);
     }
 
+    @Operation(summary = "Récupérer tous les destinataires")
     @GetMapping
     public ResponseEntity<List<DestinataireDTO>> findAll() {
         List<DestinataireDTO> list = destinataireService.findAll();
         return ResponseEntity.ok().body(list);
     }
 
+    @Operation(summary = "Récupérer un destinataire par son ID")
     @GetMapping("/{id}")
     public ResponseEntity<DestinataireDTO> findById(@PathVariable UUID id) {
         DestinataireDTO dto = destinataireService.findById(id)
@@ -39,16 +45,18 @@ public class DestinataireController {
         return ResponseEntity.ok().body(dto);
     }
 
+    @Operation(summary = "Mettre à jour un destinataire")
     @PutMapping("/{id}")
     public ResponseEntity<DestinataireDTO> updateDestinataire(@PathVariable UUID id, @Valid @RequestBody DestinataireDTO destinataireDetails) {
         destinataireService.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Destinataire not found with id: " + id));
 
-        destinataireDetails.setId(id.toString()); // Convert UUID back to String for DTO
+        destinataireDetails.setId(id.toString());
         DestinataireDTO updatedDestinataire = destinataireService.save(destinataireDetails);
         return ResponseEntity.ok(updatedDestinataire);
     }
 
+    @Operation(summary = "Supprimer un destinataire")
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteDestinataire(@PathVariable UUID id){
         destinataireService.findById(id)
@@ -57,7 +65,3 @@ public class DestinataireController {
         return ResponseEntity.noContent().build();
     }
 }
-// Commit 44 on 2025-10-29 00:40:59
-// Commit 60 on 2025-10-29 00:21:23
-// Commit 115 on 2025-10-29 23:03:21
-// Commit 4 on 2025-10-30 16:50:11

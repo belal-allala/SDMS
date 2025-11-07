@@ -20,7 +20,4 @@ public class ZoneDTO {
     @Size(max = 10, message = "Le code postal ne peut pas dépasser 10 caractères")
     private String codePostal;
 }
-// Commit 52 on 2025-10-29 17:56:32
-// Commit 92 on 2025-10-28 09:29:12
-// Commit 94 on 2025-10-26 16:18:10
-// Commit 111 on 2025-10-28 03:14:38
+

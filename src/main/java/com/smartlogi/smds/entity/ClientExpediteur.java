@@ -1,5 +1,7 @@
 package com.smartlogi.smds.entity;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -14,6 +16,7 @@ import java.util.UUID;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class ClientExpediteur {
 
     @Id
@@ -46,6 +49,3 @@ public class ClientExpediteur {
     @Column(name = "adresse")
     private String adresse;
 }
-// Commit 38 on 2025-10-28 08:21:59
-// Commit 56 on 2025-10-28 15:59:52
-// Commit 90 on 2025-10-27 20:01:40

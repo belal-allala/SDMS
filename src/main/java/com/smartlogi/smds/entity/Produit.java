@@ -1,5 +1,7 @@
 package com.smartlogi.smds.entity;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -15,6 +17,7 @@ import java.util.UUID;
 @AllArgsConstructor
 @Data
 @NoArgsConstructor
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Produit {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
@@ -40,9 +43,3 @@ public class Produit {
     @Column(name = "prix")
     private Double prix;
 }
-// Commit 34 on 2025-10-27 20:21:02
-// Commit 45 on 2025-10-27 09:34:39
-// Commit 6 on 2025-10-29 05:38:11
-// Commit 7 on 2025-10-28 04:40:56
-// Commit 58 on 2025-10-28 01:23:29
-// Commit 91 on 2025-10-28 23:20:50

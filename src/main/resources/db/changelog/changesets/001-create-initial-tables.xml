@@ -98,6 +98,7 @@
             <column name="statut" type="VARCHAR(50)"/>
             <column name="priorite" type="VARCHAR(50)"/>
             <column name="ville_destination" type="VARCHAR(255)"/>
+            <column name="date_creation" type="DATE"/>
             <column name="client_expediteur_id" type="UUID">
                 <constraints nullable="false" foreignKeyName="fk_colis_client_expediteur" references="client_expediteur(id)"/>
             </column>

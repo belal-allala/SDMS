@@ -4,6 +4,7 @@ import com.smartlogi.smds.dto.Colis_ProduitDTO;
 import com.smartlogi.smds.entity.Colis;
 import com.smartlogi.smds.entity.Colis_Produit;
 import com.smartlogi.smds.entity.Produit;
+import com.smartlogi.smds.exception.ResourceNotFoundException;
 import com.smartlogi.smds.mapper.Colis_ProduitMapper;
 import com.smartlogi.smds.repository.ColisRepository;
 import com.smartlogi.smds.repository.Colis_ProduitRepository;
@@ -11,6 +12,7 @@ import com.smartlogi.smds.repository.ProduitRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -33,22 +35,26 @@ public class Colis_ProduitServiceImpl implements Colis_ProduitService {
 
     @Override
     public Colis_ProduitDTO save(Colis_ProduitDTO colisProduitDTO) {
-        Colis_Produit colisProduit = colisProduitMapper.toEntity(colisProduitDTO);
+        // 1. Charger les entités parentes
+        Colis colis = colisRepository.findById(UUID.fromString(colisProduitDTO.getColisId()))
+                .orElseThrow(() -> new ResourceNotFoundException("Colis non trouvé avec l'ID: " + colisProduitDTO.getColisId()));
 
-        if (colisProduitDTO.getColisId() != null) {
-            Colis colis = colisRepository.findById(UUID.fromString(colisProduitDTO.getColisId()))
-                    .orElseThrow(() -> new RuntimeException("Colis non trouvé"));
-            colisProduit.setColis(colis);
-        }
+        Produit produit = produitRepository.findById(UUID.fromString(colisProduitDTO.getProduitId()))
+                .orElseThrow(() -> new ResourceNotFoundException("Produit non trouvé avec l'ID: " + colisProduitDTO.getProduitId()));
 
-        if (colisProduitDTO.getProduitId() != null) {
-            Produit produit = produitRepository.findById(UUID.fromString(colisProduitDTO.getProduitId()))
-                    .orElseThrow(() -> new RuntimeException("Produit non trouvé"));
-            colisProduit.setProduit(produit);
-        }
+        // 2. Créer l'entité Colis_Produit
+        Colis_Produit colisProduit = new Colis_Produit();
+        colisProduit.setColis(colis);
+        colisProduit.setProduit(produit);
+        colisProduit.setQuantite(colisProduitDTO.getQuantite());
 
-        colisProduit = colisProduitRepository.save(colisProduit);
-        return colisProduitMapper.toDTO(colisProduit);
+        // 3. Logique métier : Calculer le prix et définir la date
+        colisProduit.setPrix(produit.getPrix() * colisProduitDTO.getQuantite());
+        colisProduit.setDateAjout(LocalDate.now());
+
+        // 4. Sauvegarder et retourner le DTO
+        Colis_Produit savedRelation = colisProduitRepository.save(colisProduit);
+        return colisProduitMapper.toDTO(savedRelation);
     }
 
     @Override
@@ -71,5 +77,3 @@ public class Colis_ProduitServiceImpl implements Colis_ProduitService {
         colisProduitRepository.deleteById(id);
     }
 }
-// Commit 20 on 2025-10-28 10:59:01
-// Commit 68 on 2025-10-30 12:38:59

@@ -1,5 +1,7 @@
 package com.smartlogi.smds.entity;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
@@ -15,6 +17,7 @@ import java.util.UUID;
 @AllArgsConstructor
 @Data
 @NoArgsConstructor
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Colis_Produit {
 
     @Id
@@ -46,5 +49,3 @@ public class Colis_Produit {
     private LocalDate dateAjout;
 
 }
-// Commit 30 on 2025-10-29 21:02:33
-// Commit 32 on 2025-10-27 17:39:41

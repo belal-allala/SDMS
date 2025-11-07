@@ -18,13 +18,10 @@ public interface ColisMapper {
     @Mapping(source = "zone.id", target = "zoneId")
     ColisDTO toDTO(Colis colis);
 
-    @Mapping(source = "destinataireId", target = "destinataire.id")
-    @Mapping(source = "clientExpediteurId", target = "clientExpediteur.id")
-    @Mapping(source = "livreurId", target = "livreur.id")
-    @Mapping(source = "zoneId", target = "zone.id")
+    @Mapping(target = "destinataire", ignore = true)
+    @Mapping(target = "clientExpediteur", ignore = true)
+    @Mapping(target = "livreur", ignore = true)
+    @Mapping(target = "zone", ignore = true)
     Colis toEntity(ColisDTO colisDTO);
 }
-// Commit 114 on 2025-10-30 09:29:20
-// Commit 55 on 2025-10-27 00:52:16
-// Commit 63 on 2025-10-28 04:37:39
-// Commit 64 on 2025-10-29 11:16:31
+

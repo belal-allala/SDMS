@@ -1,5 +1,7 @@
 package com.smartlogi.smds.entity;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -14,6 +16,7 @@ import java.util.UUID;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Livreur {
 
     @Id
@@ -41,11 +44,3 @@ public class Livreur {
     @JoinColumn(name = "zone_assignee_id")
     private Zone zone;
 }
-// Commit 4 on 2025-10-26 10:12:59
-// Commit 11 on 2025-10-26 01:51:47
-// Commit 12 on 2025-10-28 16:06:29
-// Commit 21 on 2025-10-29 10:49:41
-// Commit 27 on 2025-10-27 14:18:12
-// Commit 31 on 2025-10-29 18:19:24
-// Commit 41 on 2025-10-28 02:00:15
-// Commit 80 on 2025-10-27 12:10:23

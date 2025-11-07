@@ -30,7 +30,4 @@ public class ProduitDTO {
     @Positive(message = "Le prix doit être un nombre positif")
     private Double prix;
 }
-// Commit 28 on 2025-10-29 22:26:18
-// Commit 22 on 2025-10-26 14:50:31
-// Commit 82 on 2025-10-30 22:11:50
-// Commit 103 on 2025-10-26 06:01:01
+
