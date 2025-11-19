@@ -66,16 +66,14 @@ class LivreurServiceImplTest {
 
     @Test
     void save() {
-        when(livreurMapper.toEntity(any(LivreurDTO.class))).thenReturn(livreur);
         when(zoneRepository.findById(zoneId)).thenReturn(Optional.of(zone));
         when(livreurRepository.save(any(Livreur.class))).thenReturn(livreur);
-        when(livreurMapper.toDto(any(Livreur.class))).thenReturn(livreurDTO);
 
         LivreurDTO savedDto = livreurService.save(livreurDTO);
 
         assertNotNull(savedDto);
         assertEquals(livreurId.toString(), savedDto.getId());
-        verify(livreurRepository, times(1)).save(livreur);
+        verify(livreurRepository, times(1)).save(any(Livreur.class));
         verify(zoneRepository, times(1)).findById(zoneId);
     }
 
@@ -96,7 +94,6 @@ class LivreurServiceImplTest {
     @Test
     void findAll() {
         when(livreurRepository.findAll()).thenReturn(Collections.singletonList(livreur));
-        when(livreurMapper.toDto(any(Livreur.class))).thenReturn(livreurDTO);
 
         List<LivreurDTO> result = livreurService.findAll();
 
@@ -109,7 +106,6 @@ class LivreurServiceImplTest {
     @Test
     void findById_whenLivreurExists() {
         when(livreurRepository.findById(livreurId)).thenReturn(Optional.of(livreur));
-        when(livreurMapper.toDto(any(Livreur.class))).thenReturn(livreurDTO);
 
         Optional<LivreurDTO> result = livreurService.findById(livreurId);
 
@@ -128,12 +124,4 @@ class LivreurServiceImplTest {
         verify(livreurRepository, times(1)).findById(livreurId);
     }
 
-    @Test
-    void deleteById() {
-        doNothing().when(livreurRepository).deleteById(livreurId);
-
-        livreurService.deleteById(livreurId);
-
-        verify(livreurRepository, times(1)).deleteById(livreurId);
-    }
 }

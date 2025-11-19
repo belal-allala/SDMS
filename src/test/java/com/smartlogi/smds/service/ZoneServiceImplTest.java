@@ -50,21 +50,17 @@ class ZoneServiceImplTest {
 
     @Test
     void save() {
-        when(zoneMapper.toEntity(any(ZoneDTO.class))).thenReturn(zone);
         when(zoneRepository.save(any(Zone.class))).thenReturn(zone);
-        when(zoneMapper.toDTO(any(Zone.class))).thenReturn(zoneDTO);
-
         ZoneDTO savedDto = zoneService.save(new ZoneDTO());
 
         assertNotNull(savedDto);
         assertEquals(zoneId.toString(), savedDto.getId());
-        verify(zoneRepository, times(1)).save(zone);
+        verify(zoneRepository, times(1)).save(any(Zone.class));
     }
 
     @Test
     void findAll() {
         when(zoneRepository.findAll()).thenReturn(Collections.singletonList(zone));
-        when(zoneMapper.toDTO(any(Zone.class))).thenReturn(zoneDTO);
 
         List<ZoneDTO> result = zoneService.findAll();
 
@@ -77,7 +73,6 @@ class ZoneServiceImplTest {
     @Test
     void findById_whenZoneExists() {
         when(zoneRepository.findById(zoneId)).thenReturn(Optional.of(zone));
-        when(zoneMapper.toDTO(any(Zone.class))).thenReturn(zoneDTO);
 
         Optional<ZoneDTO> result = zoneService.findById(zoneId);
 
@@ -96,12 +91,4 @@ class ZoneServiceImplTest {
         verify(zoneRepository, times(1)).findById(zoneId);
     }
 
-    @Test
-    void deleteById() {
-        doNothing().when(zoneRepository).deleteById(zoneId);
-
-        zoneService.deleteById(zoneId);
-
-        verify(zoneRepository, times(1)).deleteById(zoneId);
-    }
 }

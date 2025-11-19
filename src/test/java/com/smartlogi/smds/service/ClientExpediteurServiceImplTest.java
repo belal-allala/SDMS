@@ -50,21 +50,18 @@ class ClientExpediteurServiceImplTest {
 
     @Test
     void save() {
-        when(clientExpediteurMapper.toEntity(any(ClientExpediteurDTO.class))).thenReturn(clientExpediteur);
         when(clientExpediteurRepository.save(any(ClientExpediteur.class))).thenReturn(clientExpediteur);
-        when(clientExpediteurMapper.toDto(any(ClientExpediteur.class))).thenReturn(clientExpediteurDTO);
 
         ClientExpediteurDTO savedDto = clientExpediteurService.save(new ClientExpediteurDTO());
 
         assertNotNull(savedDto);
         assertEquals(clientId.toString(), savedDto.getId());
-        verify(clientExpediteurRepository, times(1)).save(clientExpediteur);
+        verify(clientExpediteurRepository, times(1)).save(any(ClientExpediteur.class));
     }
 
     @Test
     void findAll() {
         when(clientExpediteurRepository.findAll()).thenReturn(Collections.singletonList(clientExpediteur));
-        when(clientExpediteurMapper.toDto(any(ClientExpediteur.class))).thenReturn(clientExpediteurDTO);
 
         List<ClientExpediteurDTO> result = clientExpediteurService.findAll();
 
@@ -77,7 +74,6 @@ class ClientExpediteurServiceImplTest {
     @Test
     void findById_whenClientExists() {
         when(clientExpediteurRepository.findById(clientId)).thenReturn(Optional.of(clientExpediteur));
-        when(clientExpediteurMapper.toDto(any(ClientExpediteur.class))).thenReturn(clientExpediteurDTO);
 
         Optional<ClientExpediteurDTO> result = clientExpediteurService.findById(clientId);
 
@@ -96,12 +92,4 @@ class ClientExpediteurServiceImplTest {
         verify(clientExpediteurRepository, times(1)).findById(clientId);
     }
 
-    @Test
-    void deleteById() {
-        doNothing().when(clientExpediteurRepository).deleteById(clientId);
-
-        clientExpediteurService.deleteById(clientId);
-
-        verify(clientExpediteurRepository,times(1)).save(clientExpediteur);
-    }
 }

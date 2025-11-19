@@ -50,21 +50,18 @@ class DestinataireServiceImplTest {
 
     @Test
     void save() {
-        when(destinataireMapper.toEntity(any(DestinataireDTO.class))).thenReturn(destinataire);
         when(destinataireRepository.save(any(Destinataire.class))).thenReturn(destinataire);
-        when(destinataireMapper.toDTO(any(Destinataire.class))).thenReturn(destinataireDTO);
 
         DestinataireDTO savedDto = destinataireService.save(new DestinataireDTO());
 
         assertNotNull(savedDto);
         assertEquals(destinataireId.toString(), savedDto.getId());
-        verify(destinataireRepository, times(1)).save(destinataire);
+        verify(destinataireRepository, times(1)).save(any(Destinataire.class));
     }
 
     @Test
     void findAll() {
         when(destinataireRepository.findAll()).thenReturn(Collections.singletonList(destinataire));
-        when(destinataireMapper.toDTO(any(Destinataire.class))).thenReturn(destinataireDTO);
 
         List<DestinataireDTO> result = destinataireService.findAll();
 
